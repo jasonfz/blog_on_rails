@@ -11,6 +11,19 @@
   </head>
 
   <body>
+    <nav>
+    <span><h1><%= link_to "Blog On Rails", root_path %></h1></span>
+  
+    <span><h3><%= link_to "Home", root_path %></h3></span>
+    <span><h3> <%= link_to "New Post", new_post_path %></h3></span>
+ 
+   
+    </nav >
+
+
+
+
     <%= yield %>
   </body>
 </html>
+  
