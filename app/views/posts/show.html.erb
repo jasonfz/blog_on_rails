@@ -2,20 +2,22 @@
 <h2><%= @post.title %></h2>
 <p><%= @post.body %></p>
 <p><small>Posted: <%= time_ago_in_words(@post.created_at) %> ago</small></p>
-
+<small>Created by: <%= @post.user.full_name %></small>
+<% if can? :crud, @post %>
   <%= button_to 'Edit', edit_post_path(@post), method: :get %>
   <%= button_to 'Delete', post_path(@post), method: :delete, data: {turbo_confirm: "Are you sure?"} %>
-  
+  <% end %>
 <ul>
   <% @comments.each do |comment| %>
 
     <li>
       <%= comment.body %>
       <small>
-        Commented <%= time_ago_in_words(comment.created_at)%> ago
+        Commented <%= time_ago_in_words(comment.created_at)%> ago by <%= comment.user.full_name %>
       </small>
-
+<% if can? :crud, comment %>
        <%= link_to "Delete", post_comment_path(@post.id, comment.id), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+       <% end %>
     </li>
 
   <% end %>
