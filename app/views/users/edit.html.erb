@@ -1,6 +1,9 @@
 <h1>Edit User Page</h1>
 
-<%= form_with model: @user do |f| %>
+
+<%# @user = current_user %>
+
+<%= form_with(model: current_user) do |f| %>
     <div>
         <%= f.label :first_name %>
         <%= f.text_field :first_name %>
@@ -17,3 +20,4 @@
     <%= f.submit "Edit" %>
 <% end %>
 
+<span><h3> <%= link_to "change password", edit_password_user_path(current_user, @user) %></h3></span>

@@ -11,6 +11,7 @@
   </head>
 
   <body>
+  
     <nav>
     <span><h1><%= link_to "Blog On Rails", root_path %></h1></span>
   
@@ -19,10 +20,12 @@
 
 
     <%if(user_signed_in?) %>
-     <h5>Hello, <%= current_user.full_name %></h5>
+     <h5>Hello, <%= link_to current_user.full_name, edit_user_path(current_user, @user)%></h5>
 
- 
- 
+<%#= link_to current_user.full_name, edit_user_path(current_user, @user)%>
+  
+ <%#= button_to "update user info", edit_user_path(current_user), method: :get %>
+
 
  <span><h3> <%= button_to "Log out", session_path, method: :delete %></h3></span>
        <% else %>
@@ -32,6 +35,12 @@
 
      <% end %>
     </nav >
+    
+ <% flash.each do |type, message| %>
+      <div class="alert alert-info" role=alert >
+        <%= type + "-------" + message %>
+      </div>
+    <% end %>
 
     <%= yield %>
   </body>
