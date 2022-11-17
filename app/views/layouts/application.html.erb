@@ -11,6 +11,38 @@
   </head>
 
   <body>
+  
+    <nav>
+    <span><h1><%= link_to "Blog On Rails", root_path %></h1></span>
+  
+    <span><h3><%= link_to "Home", root_path %></h3></span>
+    <span><h3> <%= link_to "New Post", new_post_path %></h3></span>
+
+
+    <%if(user_signed_in?) %>
+     <h5>Hello, <%= link_to current_user.full_name, edit_user_path(current_user, @user)%></h5>
+
+<%#= link_to current_user.full_name, edit_user_path(current_user, @user)%>
+  
+ <%#= button_to "update user info", edit_user_path(current_user), method: :get %>
+
+
+ <span><h3> <%= button_to "Log out", session_path, method: :delete %></h3></span>
+       <% else %>
+    <span><h3> <%= link_to "Sign In", new_session_path %></h3></span>
+ 
+<span><h3> <%= link_to "Sign Up", new_user_path %></h3></span>
+
+     <% end %>
+    </nav >
+    
+ <% flash.each do |type, message| %>
+      <div class="alert alert-info" role=alert >
+        <%= type + "-------" + message %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
+  
